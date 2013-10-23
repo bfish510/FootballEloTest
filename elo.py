@@ -1,28 +1,10 @@
-def main():
-	teama = 1600
-	teamb = 1200
-	print("Team A Rating: " + str(teama))
-	print("Team B Rating: " + str(teamb))
-	eSA = computeEstimatedResult(teama, teamb)
-	eSB = computeEstimatedResult(teamb, teama)
-	print("Team A Estimated Score: " + str(eSA))
-	print("Team B Estimated Score: " + str(eSB))
-	aSA = 16
-	aSB = 7
-	print("Team A Actual Score: " + str(aSA/(aSA + aSB)))
-	print("Team B Actual Score: " + str(aSB/(aSA + aSB)))
-	teama = computeNewRatings(teama, eSA, (aSA/(aSA + aSB)))
-	teamb = computeNewRatings(teamb, eSB, (aSB/(aSA + aSB)))
-	print("Team A New Rating: " + str(teama))
-	print("Team B New Rating: " + str(teamb))
-
-
 def computeEstimatedResult(team1, team2):
 	exponent = (team2 - team1)/400
 	value = 1/(1 + (10 ** exponent))
 	return value
 
 def computeNewRatings(team1, predictedScore, actualScore, isPreseason):
+	#teams tend to use new players as a test during the preseason so we have a larger skill margin
 	skillFactor = 16
 	if(isPreseason):
 		skillFactor = 32
@@ -33,6 +15,7 @@ def initData():
 	#teams
 	teams = ['Bears','Cardinals','Packers','Giants','Lions','Redskins','Steelers','Eagles','Rams','49ers','Browns','Colts','Cowboys','Raiders','Patriots','Titans','Broncos','Chargers','Jets','Chiefs','Bills','Vikings','Dolphins','Falcons','Saints','Bengals','Seahawks','Buccaneers','Jaguars','Panthers','Ravens','Texans']
 	
+	#use 1500 as our base rating
 	for team in teams:
 		teamRating[team] = 1500
 
