@@ -153,7 +153,7 @@ def parseSteps(year, week, preseason, postseason):
 dataFile.write('homeTeam,homeFirstQuater,homeSecondQuater,homeThirdQuater,homeFourthQuater,homeOTQuater,homeTotalScore,awayTeam,awayFirstQuater,awaySecondQuater,awayThirdQuater,awayFourthQuater,awayOTQuater,awayTotalScore,date,preseason,postseason\n')
 
 if(go):
-	for year in range(2001, 2012):
+	for year in range(2001, 2013):
 		for week in range(1,5):
 			parseSteps(year, week, True, False)
 		for week in range(1,18):
