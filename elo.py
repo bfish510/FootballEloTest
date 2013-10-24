@@ -10,10 +10,13 @@ games = []
 
 #bounds
 earliestYear = 2012
-latestYear = 2012
-postSeasonGames = False
+latestYear = 2013
+postSeasonGames = True
 preSeasonGames = False
 regularSeasonGames = True
+
+useTeamFilter = False
+teamFilter = ['Jets', 'Giants', 'Patriots', 'Bills']
 
 numberOfWeeksInSeason = 0
 
@@ -76,9 +79,13 @@ def inDataRange(game):
 	if(game.preseason == 'True'):
 		if(not preSeasonGames):
 			return False
+		else:
+			return True
 	if(game.postseason == 'True'):
 		if(not postSeasonGames):
 			return False
+		else:
+			return True
 	if(game.preseason == 'False'):
 		if(game.postseason == 'False'):
 			if(not regularSeasonGames):
@@ -144,15 +151,28 @@ def initData():
 
 	headerLabel = 'Week'
 	for team in teamRating:
-		headerLabel += ',' + team
+		if(useTeamFilter):
+			if(team in teamFilter):
+				headerLabel += ',' + team
+		else:
+			headerLabel += ',' + team
 	for week in ratingsGraph:
 		headerLabel += '\n'
 		headerLabel += str(week)
 		for team in teamRating:
-			if(team in ratingsGraph[week]):
-				headerLabel += ',' + str(ratingsGraph[week][team])
+			if(useTeamFilter):
+				if(team in teamFilter):
+					if(team in ratingsGraph[week]):
+						headerLabel += ',' + str(ratingsGraph[week][team])
+					else:
+						ratingsGraph[week][team] = ratingsGraph[week - 1][team]
+						headerLabel += ',' + str(ratingsGraph[week][team])
 			else:
-				headerLabel += ','
+				if(team in ratingsGraph[week]):
+					headerLabel += ',' + str(ratingsGraph[week][team])
+				else:
+					ratingsGraph[week][team] = ratingsGraph[week - 1][team]
+					headerLabel += ',' + str(ratingsGraph[week][team])
 	print(headerLabel)
 	ratings.write(headerLabel)
 
