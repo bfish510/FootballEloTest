@@ -167,7 +167,7 @@ if(go):
 			parseSteps(year, 22, False, True)
 	for week in range(1,4):
 		parseSteps(2013, week, True, False)
-	for week in range(1,8):
+	for week in range(1,10):
 		parseSteps(2013, week, False, False)
 else:
 	parseSteps(2013, 1, False, False)

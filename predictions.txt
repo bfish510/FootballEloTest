@@ -1,0 +1,65 @@
+Bengals vs. Dolphins
+	Bengals Rating: 1578.7156307265755
+	Dolphins Rating: 1488.6161685652016
+	Bengals Final Score 20.47084992021437
+	Dolphins Rating: 19.73173471183702
+Falcons vs. Panthers
+	Falcons Rating: 1485.5173255932007
+	Panthers Rating: 1570.920591288412
+	Falcons Final Score 21.13296453008084
+	Panthers Rating: 20.7964895990117
+Vikings vs. Cowboys
+	Vikings Rating: 1428.0794525411045
+	Cowboys Rating: 1560.0999413329132
+	Vikings Final Score 23.274430372910707
+	Cowboys Rating: 22.811325910514636
+Saints vs. Jets
+	Saints Rating: 1593.8650093239971
+	Jets Rating: 1434.9238559735845
+	Saints Final Score 23.71013401634152
+	Jets Rating: 22.981983383824755
+Titans vs. Rams
+	Titans Rating: 1454.227179278594
+	Rams Rating: 1477.635862873034
+	Titans Final Score 19.97418954773682
+	Rams Rating: 19.17712134091235
+Chiefs vs. Bills
+	Chiefs Rating: 1511.133270424024
+	Bills Rating: 1464.6168148819024
+	Chiefs Final Score 19.448313009323503
+	Bills Rating: 20.377336476641148
+Chargers vs. Redskins
+	Chargers Rating: 1536.824743671938
+	Redskins Rating: 1498.774905237362
+	Chargers Final Score 22.21603466305688
+	Redskins Rating: 22.351954912134133
+Eagles vs. Raiders
+	Eagles Rating: 1435.2658886929041
+	Raiders Rating: 1470.0784706118848
+	Eagles Final Score 23.38821798649336
+	Raiders Rating: 22.43013408078895
+Buccaneers vs. Seahawks
+	Buccaneers Rating: 1433.701493364557
+	Seahawks Rating: 1568.3115203353427
+	Buccaneers Final Score 20.435143745314466
+	Seahawks Rating: 20.619267693694255
+Ravens vs. Browns
+	Ravens Rating: 1516.8959107553167
+	Browns Rating: 1467.0940354168094
+	Ravens Final Score 20.01944869978073
+	Browns Rating: 18.92099427984522
+Steelers vs. Patriots
+	Steelers Rating: 1500.7936504923487
+	Patriots Rating: 1530.721208519815
+	Steelers Final Score 21.895789831215
+	Patriots Rating: 21.26187784337835
+Colts vs. Texans
+	Colts Rating: 1550.1608206265244
+	Texans Rating: 1439.031496257769
+	Colts Final Score 22.230985557874455
+	Texans Rating: 22.184006736975654
+Bears vs. Packers
+	Bears Rating: 1491.227538376698
+	Packers Rating: 1562.5660896510242
+	Bears Final Score 21.741711020422798
+	Packers Rating: 22.590527667170406

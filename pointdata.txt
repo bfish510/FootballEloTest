@@ -1,0 +1,128 @@
+Team: Cowboys
+	Points on average: 11.645963577161888
+	Points given up on average: 12.089102762157424
+
+Team: Browns
+	Points on average: 8.968329481953804
+	Points given up on average: 9.240941959722381
+
+Team: Titans
+	Points on average: 10.675316852527976
+	Points given up on average: 10.275088252738202
+
+Team: Rams
+	Points on average: 8.988581350551366
+	Points given up on average: 9.38563457714173
+
+Team: Chargers
+	Points on average: 11.054946601947576
+	Points given up on average: 11.289372143125979
+
+Team: Ravens
+	Points on average: 10.586887690480149
+	Points given up on average: 9.829991984284819
+
+Team: Buccaneers
+	Points on average: 10.093802984179879
+	Points given up on average: 11.335798991956969
+
+Team: Steelers
+	Points on average: 9.780268924776392
+	Points given up on average: 8.748045250121118
+
+Team: Panthers
+	Points on average: 10.072931820724362
+	Points given up on average: 10.204743266819724
+
+Team: Bears
+	Points on average: 10.683333545499309
+	Points given up on average: 9.848394138000904
+
+Team: Eagles
+	Points on average: 11.354623634865366
+	Points given up on average: 11.630746310816344
+
+Team: Vikings
+	Points on average: 10.670982727284859
+	Points given up on average: 10.891848738342153
+
+Team: Saints
+	Points on average: 12.35286390851234
+	Points given up on average: 12.191031552612369
+
+Team: Broncos
+	Points on average: 12.143701691564118
+	Points given up on average: 12.149957394977852
+
+Team: Falcons
+	Points on average: 11.157912463392652
+	Points given up on average: 10.930119771553816
+
+Team: 49ers
+	Points on average: 10.14530180152045
+	Points given up on average: 9.315112818246856
+
+Team: Raiders
+	Points on average: 10.874872834652948
+	Points given up on average: 11.97194568146593
+
+Team: Giants
+	Points on average: 11.199026127960696
+	Points given up on average: 11.344853342139272
+
+Team: Lions
+	Points on average: 12.36103541846932
+	Points given up on average: 12.039088590308333
+
+Team: Patriots
+	Points on average: 12.215857297437385
+	Points given up on average: 11.930739521659142
+
+Team: Jets
+	Points on average: 9.743256411738107
+	Points given up on average: 10.612256057065183
+
+Team: Colts
+	Points on average: 11.060449830307855
+	Points given up on average: 11.126678322860021
+
+Team: Jaguars
+	Points on average: 9.82218352653851
+	Points given up on average: 9.993074192974438
+
+Team: Cardinals
+	Points on average: 9.920306055203715
+	Points given up on average: 9.98269249503357
+
+Team: Dolphins
+	Points on average: 9.227810132671745
+	Points given up on average: 9.507544126108263
+
+Team: Redskins
+	Points on average: 11.03481561857787
+	Points given up on average: 11.174083581181167
+
+Team: Bills
+	Points on average: 11.267617470265028
+	Points given up on average: 11.075184510248341
+
+Team: Chiefs
+	Points on average: 8.690507209587814
+	Points given up on average: 9.363181935735952
+
+Team: Seahawks
+	Points on average: 9.83681781716323
+	Points given up on average: 10.274599647111595
+
+Team: Packers
+	Points on average: 12.254847931593638
+	Points given up on average: 10.995222684335088
+
+Team: Texans
+	Points on average: 11.026261929008742
+	Points given up on average: 11.219850599778944
+
+Team: Bengals
+	Points on average: 10.668747847765577
+	Points given up on average: 10.245716344316236
+
