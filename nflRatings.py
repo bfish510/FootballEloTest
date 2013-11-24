@@ -1,17 +1,14 @@
 from EloClass import Elo
+import time
 
+#this is used for auto complete so that I can type in predictions quicker.
 dontUseList = ['Texans', 'Titans', 'Raiders', 'Falcons', 'Rams', 'Cardinals', 'Buccaneers', 'Cowboys', 'Chargers', 'Jaguars', 'Dolphins', 'Packers', 'Browns', 'Jets', 'Panthers', 'Redskins', 'Vikings', 'Giants', 'Broncos', 'Lions', 'Saints', 'Bengals', 'Bears', 'Eagles', 'Seahawks', 'Patriots', 'Ravens', '49ers', 'Colts', 'Steelers', 'Bills', 'Chiefs']
-
 ratingsGraph = {}
-numGames = 0
-pointsScoredPerGame = {}
-
-games = []
 
 #bounds
-earliestYear = 2010
+earliestYear = 2002
 latestYear = 2013
-latestWeek = 8
+latestWeek = 10
 postSeasonGames = True
 preSeasonGames = False
 regularSeasonGames = True
@@ -19,18 +16,15 @@ regularSeasonGames = True
 useTeamFilter = False
 teamFilter = ['Jets', 'Giants', 'Patriots', 'Bills']
 
-numberOfWeeksInSeason = 0
 
-if(regularSeasonGames):
-	numberOfWeeksInSeason += 17
-if(postSeasonGames):
-	numberOfWeeksInSeason += 4
-if(preSeasonGames):
-	numberOfWeeksInSeason += 4
 
 PRE_SEASON = 0
 REGULAR_SEASON = 1
 POST_SEASON = 3
+
+kFactorTuple = ()
+
+#use this to determine ppg fall off
 
 
 def computeEstimatedResult(team1, team2):
@@ -38,9 +32,24 @@ def computeEstimatedResult(team1, team2):
 	value = 1/(1 + (10 ** exponent))
 	return value
 
+#used for back testing
+def setKFactor(ktuple):
+	kFactorTuple = ktuple
+
 def getKFactor(seasonEnum):
 	#teams tend to use new players as a test during the preseason so we have a larger skill margin
 	skillFactor = 0
+	if(len(kFactorTuple) == 3):
+		if(seasonEnum == PRE_SEASON):
+			#was 32
+			skillFactor = kFactorTuple[0]
+		else:
+			#was 8
+			if(seasonEnum == POST_SEASON):
+				skillFactor = kFactorTuple[1]
+			else:
+				#was 16
+				skillFactor = kFactorTuple[2]
 	if(seasonEnum == PRE_SEASON):
 		skillFactor = 32
 	else:
@@ -87,11 +96,47 @@ def inDataRange(game):
 				return False
 	return True
 
+#add prediction variables
+
+yearBuffer = 1
+
+def setupPredictions(game):
+	if(game.year - yearBuffer >= earliestYear):
+		#add year before buffer or something to eliminate early outliers
+		overallWeek = int(game.week) + ((int(game.year) - earliestYear) * numberOfWeeksInSeason)
+		#by rating
+		if(elo.getRating(game.homeTeam) > elo.getRating(game.awayTeam)):
+			predictedWinner = game.homeTeam
+		else:
+			predictedWinner = game.awayTeam
+		ratingPrediction.addPrediction(game.homeTeam, game.awayTeam, overallWeek, predictedWinner)
+		#by ppg
+		estimate0 = elo.computeEstimatedResult(game.homeTeam, game.awayTeam)
+		estimate1 = 1 - estimate0
+		scoreHome = ((pointScoredOnAverage[game.homeTeam] * estimate0) + (pointsGivenUpOnAverage[game.awayTeam] * estimate1)) * 2
+		scoreAway = ((pointScoredOnAverage[game.awayTeam] * estimate1) + (pointsGivenUpOnAverage[game.homeTeam] * estimate0)) * 2
+		if(scoreHome > scoreAway):
+			predictedWinner = game.homeTeam
+		else:
+			predictedWinner = game.awayTeam
+		ppgPrediction.addPrediction(game.homeTeam, game.awayTeam, overallWeek, predictedWinner)
+		
+def processPredictionResults(game):
+	overallWeek = int(game.week) + ((int(game.year) - earliestYear) * numberOfWeeksInSeason)
+	if(game.homeScore > game.awayScore):
+		ppgPrediction.matchResult(game.homeTeam, game.awayTeam, overallWeek, game.homeTeam)
+		ratingPrediction.matchResult(game.homeTeam, game.awayTeam, overallWeek, game.homeTeam)
+	else:
+		ppgPrediction.matchResult(game.homeTeam, game.awayTeam, overallWeek, game.awayTeam)
+		ratingPrediction.matchResult(game.homeTeam, game.awayTeam, overallWeek, game.awayTeam)
+
 def processData():
 	#compute ratings
 	for game in games:
 		#add a check that a game is in the key set of the ratings maps
 		if(inDataRange(game)):
+			setupPredictions(game)
+			processPredictionResults(game)
 			seasonType = REGULAR_SEASON
 			if(game.isPreseason):
 				seasonType = PRE_SEASON
@@ -114,27 +159,7 @@ def processData():
 				ratingsGraph[overallWeek][game.homeTeam] = elo.getRating(game.homeTeam)
 				ratingsGraph[overallWeek][game.awayTeam] = elo.getRating(game.awayTeam)
 			#effective points per game
-			if(game.homeTeam not in pointScoredOnAverage):
-				pointScoredOnAverage[game.homeTeam] = (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam))
-			else:
-				temp = pointScoredOnAverage[game.homeTeam] * (overallWeek - 1)
-				pointScoredOnAverage[game.homeTeam] = (temp + (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam)))/overallWeek
-			if(game.awayTeam not in pointScoredOnAverage):
-				pointScoredOnAverage[game.awayTeam] = (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam))
-			else:
-				temp = pointScoredOnAverage[game.awayTeam] * (overallWeek - 1)
-				pointScoredOnAverage[game.awayTeam] = (temp + (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam)))/overallWeek
-			#effective points let up
-			if(game.homeTeam not in pointsGivenUpOnAverage):
-				pointsGivenUpOnAverage[game.homeTeam] = (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam))
-			else:
-				temp = pointsGivenUpOnAverage[game.homeTeam] * (overallWeek - 1)
-				pointsGivenUpOnAverage[game.homeTeam] = (temp + (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam)))/overallWeek
-			if(game.awayTeam not in pointsGivenUpOnAverage):
-				pointsGivenUpOnAverage[game.awayTeam] = (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam))
-			else:
-				temp = pointsGivenUpOnAverage[game.awayTeam] * (overallWeek - 1)
-				pointsGivenUpOnAverage[game.awayTeam] = (temp + (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam)))/overallWeek
+			pointsPerGameData(game)
 
 def createFinalRatingsFile():
 	teamRatingsFile = open('ratings.txt', 'w')
@@ -178,32 +203,29 @@ def createRatingsGraph():
 	ratings.write(headerLabel)
 	ratings.close()
 
-def pointsPerGameData():
-	for game in games:
-		overallWeek = int(game.week) + ((int(game.year) - earliestYear) * numberOfWeeksInSeason)
-		if(inDataRange(game)):
-			#points scored
-			if(game.homeTeam not in pointScoredOnAverage):
-				pointScoredOnAverage[game.homeTeam] = game.homeScore
-			else:
-				temp = pointScoredOnAverage[game.homeTeam] * (overallWeek - 1)
-				pointScoredOnAverage[game.homeTeam] = (temp + game.homeScore)/overallWeek
-			if(game.awayTeam not in pointScoredOnAverage):
-				pointScoredOnAverage[game.awayTeam] = game.awayScore
-			else:
-				temp = pointScoredOnAverage[game.awayTeam] * (overallWeek - 1)
-				pointScoredOnAverage[game.awayTeam] = (temp + game.awayScore)/overallWeek
-			#points let up
-			if(game.homeTeam not in pointsGivenUpOnAverage):
-				pointsGivenUpOnAverage[game.homeTeam] = game.awayScore
-			else:
-				temp = pointsGivenUpOnAverage[game.homeTeam] * (overallWeek - 1)
-				pointsGivenUpOnAverage[game.homeTeam] = (temp + game.awayScore)/overallWeek
-			if(game.awayTeam not in pointsGivenUpOnAverage):
-				pointsGivenUpOnAverage[game.awayTeam] = game.homeScore
-			else:
-				temp = pointsGivenUpOnAverage[game.awayTeam] * (overallWeek - 1)
-				pointsGivenUpOnAverage[game.awayTeam] = (temp + game.homeScore)/overallWeek
+def pointsPerGameData(game):
+	#points scored
+	if(game.homeTeam not in pointScoredOnAverage):
+		pointScoredOnAverage[game.homeTeam] = (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam))
+	else:
+		temp = (pointScoredOnAverage[game.homeTeam] * pointExponent) + ((1 - pointExponent) * (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam)))
+		pointScoredOnAverage[game.homeTeam] = temp
+	if(game.awayTeam not in pointScoredOnAverage):
+		pointScoredOnAverage[game.awayTeam] = (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam))
+	else:
+		temp = (pointScoredOnAverage[game.awayTeam] * pointExponent) + ((1 - pointExponent) * (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam)))
+		pointScoredOnAverage[game.awayTeam] = temp
+	#points let up
+	if(game.homeTeam not in pointsGivenUpOnAverage):
+		pointsGivenUpOnAverage[game.homeTeam] = (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam))
+	else:
+		temp = (pointsGivenUpOnAverage[game.homeTeam] * pointExponent) + ((1 - pointExponent) * (game.awayScore * elo.computeEstimatedResult(game.homeTeam, game.awayTeam)))
+		pointsGivenUpOnAverage[game.homeTeam] = temp
+	if(game.awayTeam not in pointsGivenUpOnAverage):
+		pointsGivenUpOnAverage[game.awayTeam] = (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam))
+	else:
+		temp = (pointsGivenUpOnAverage[game.awayTeam] * pointExponent) + ((1 - pointExponent) * (game.homeScore * elo.computeEstimatedResult(game.awayTeam, game.homeTeam)))
+		pointsGivenUpOnAverage[game.awayTeam] = temp
 
 def printPointData():
 	pointData = open('pointdata.txt', 'w')
@@ -217,25 +239,34 @@ def printPointData():
 def predictions():
 	predictionsFile = open('predictions.txt', 'w')
 	gamePrediction = []
-	gamePrediction.append(('Bengals', 'Dolphins'))
-	gamePrediction.append(('Falcons', 'Panthers'))
-	gamePrediction.append(('Vikings', 'Cowboys'))
-	gamePrediction.append(('Saints', 'Jets'))
-	gamePrediction.append(('Titans', 'Rams'))
-	gamePrediction.append(('Chiefs', 'Bills'))
-	gamePrediction.append(('Chargers', 'Redskins'))
-	gamePrediction.append(('Eagles', 'Raiders'))
-	gamePrediction.append(('Buccaneers', 'Seahawks'))
-	gamePrediction.append(('Ravens', 'Browns'))
-	gamePrediction.append(('Steelers', 'Patriots'))
-	gamePrediction.append(('Colts', 'Texans'))
-	gamePrediction.append(('Bears', 'Packers'))
+	gamePrediction.append(('Colts', 'Titans'))
+	gamePrediction.append(('Jets', 'Bills'))
+	gamePrediction.append(('Falcons', 'Buccaneers'))
+	gamePrediction.append(('Lions', 'Steelers'))
+	gamePrediction.append(('Redskins', 'Eagles'))
+	gamePrediction.append(('Jaguars', 'Cardinals'))
+	gamePrediction.append(('Raiders', 'Texans'))
+	gamePrediction.append(('Ravens', 'Bears'))
+	gamePrediction.append(('Browns', 'Bengals'))
+	gamePrediction.append(('Dolphins', 'Chargers'))
+	gamePrediction.append(('Packers', 'Giants'))
+	gamePrediction.append(('Vikings', 'Seahawks'))
+	gamePrediction.append(('49ers', 'Saints'))
+	gamePrediction.append(('Chiefs', 'Broncos'))
+	gamePrediction.append(('Panthers', 'Patriots'))
 	for game in gamePrediction:
 		predictionsFile.write(game[0] + " vs. " + game[1])
+		predictionsFile.write("\n")
+		if(elo.getRating(game[0]) > elo.getRating(game[1])):
+			print("Expecting " + game[0] + " over " + game[1] + " with confidence: " + str((elo.getRating(game[0]) - elo.getRating(game[1]))))
+		else:
+			print("Expecting " + game[1] + " over " + game[0] + " with confidence: " + str((elo.getRating(game[0]) - elo.getRating(game[1]))))
 		predictionsFile.write("\n")
 		predictionsFile.write("\t" + game[0] + " Rating: " + str(elo.getRating(game[0])))
 		predictionsFile.write("\n")
 		predictionsFile.write("\t" + game[1] + " Rating: " + str(elo.getRating(game[1])))
+		predictionsFile.write("\n")
+		predictionsFile.write("\t" + "Difference Rating: " + str((elo.getRating(game[0]) - elo.getRating(game[1]))))
 		predictionsFile.write("\n")
 		#basic for now we can match data later
 		estimate0 = elo.computeEstimatedResult(game[0], game[1])
@@ -244,8 +275,10 @@ def predictions():
 		score1 = ((pointScoredOnAverage[game[1]] * estimate1) + (pointsGivenUpOnAverage[game[0]] * estimate0)) * 2
 		predictionsFile.write("\t" + game[0] + " Final Score " + str(score0))
 		predictionsFile.write("\n")
-		predictionsFile.write("\t" + game[1] + " Rating: " + str(score1))
+		predictionsFile.write("\t" + game[1] + " Final Score: " + str(score1))
 		predictionsFile.write("\n")
+		predictionsFile.write("\t" + "Difference Score: " + str((score0 - score1)))
+		predictionsFile.write("\n\n")
 	predictionsFile.close()
 
 def initData():
@@ -281,8 +314,99 @@ class Game:
 	def isPostseason(self):
 		return self.postseason
 
+class Prediction:
 
-pointScoredOnAverage = {}
-pointsGivenUpOnAverage = {}
-elo = Elo()
-initData()
+	def __init__(self):
+		self.predictedGames = {}
+		self.correct = 0
+		self.wrong = 0
+
+	# we add the week as an error check for missing games
+	def addPrediction(self, team1, team2, week, winningTeam):
+		if(team1 < team2):
+			firstTeam = team1
+			secondTeam = team2
+		else:
+			firstTeam = team2
+			secondTeam = team1
+		self.predictedGames[(firstTeam, secondTeam, week)] = winningTeam
+
+	def matchResult(self, team1, team2, week, winningTeam):
+		if(team1 < team2):
+			firstTeam = team1
+			secondTeam = team2
+		else:
+			firstTeam = team2
+			secondTeam = team1
+		matchInfo = (firstTeam, secondTeam, week) 
+		if(matchInfo in self.predictedGames):
+			if(self.predictedGames[matchInfo] == winningTeam):
+				self.correct += 1
+			else:
+				self.wrong += 1
+
+	def getResult(self):
+		return (self.correct / (self.correct + self.wrong))
+
+pointExponentStarting = .5
+ppgBest = 0
+ratingBest = 0
+
+total = 0
+totalItems = 10 * 45 * 45 * 45
+
+startTime = time.time()
+
+games = []
+loadCSV()
+bestRatingResults = open('backtesting.txt' , 'w')
+
+print("Starting time: " + str(startTime))
+for i in range(8, 9):
+	for postK in range(5, 6):
+		for regularK in range(5, 6):
+			total += 1
+			setKFactor((0, postK, regularK))
+			pointExponent = pointExponentStarting + (.05 * i)
+			numberOfWeeksInSeason = 0
+			if(regularSeasonGames):
+				numberOfWeeksInSeason += 17
+			if(postSeasonGames):
+				numberOfWeeksInSeason += 4
+			if(preSeasonGames):
+				numberOfWeeksInSeason += 4
+			
+			ppgPrediction = Prediction()
+			ratingPrediction = Prediction()
+			pointScoredOnAverage = {}
+			pointsGivenUpOnAverage = {}
+			elo = Elo()
+			initData()
+			if(False):
+				if(ppgBest < ppgPrediction.getResult()):
+					print('result')
+					ppgBest = ppgPrediction.getResult()
+					bestRatingResults.write("\nBest ppg:")
+					bestRatingResults.write("\tPreK: " + str(0))
+					bestRatingResults.write("\tPostK: " + str(postK))
+					bestRatingResults.write("\tRegularK: " + str(regularK))
+					bestRatingResults.write("\tPoint exponent: " + str(pointExponent))
+					bestRatingResults.write("\tppg Result: " + str(ppgPrediction.getResult()))
+					bestRatingResults.write("\trating Result: " + str(ratingPrediction.getResult()))
+					bestRatingResults.write("\n")
+				if(ratingBest < ratingPrediction.getResult()):
+					ratingBest = ratingPrediction.getResult()
+					print('result')
+					bestRatingResults.write("\nBest rating:")
+					bestRatingResults.write("\tPreK: " + str(0))
+					bestRatingResults.write("\tPostK: " + str(postK))
+					bestRatingResults.write("\tRegularK: " + str(regularK))
+					bestRatingResults.write("\tPoint exponent: " + str(pointExponent))
+					bestRatingResults.write("\tppg Result: " + str(ppgPrediction.getResult()))
+					bestRatingResults.write("\trating Result: " + str(ratingPrediction.getResult()))
+					bestRatingResults.write("\n")
+	bestRatingResults.close()
+	bestRatingResults = open('backtesting' + str(i) + '.txt' , 'w')
+	print(time.time() - startTime)
+	startTime = time.time()
+	print(i)

@@ -7,7 +7,11 @@ class Elo:
 			print(str(team) + " " + str(self.teams[team]))
 	
 	def getRating(self, team):
-		return self.teams[team]
+		if(team in self.teams):
+			return self.teams[team]
+		else:
+			self.addTeam(team)
+			return self.teams[team]
 
 	#should be used for testing only
 	def setRating(self, team, rating):

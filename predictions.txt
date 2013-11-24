@@ -1,65 +1,135 @@
-Bengals vs. Dolphins
-	Bengals Rating: 1578.7156307265755
-	Dolphins Rating: 1488.6161685652016
-	Bengals Final Score 20.47084992021437
-	Dolphins Rating: 19.73173471183702
-Falcons vs. Panthers
-	Falcons Rating: 1485.5173255932007
-	Panthers Rating: 1570.920591288412
-	Falcons Final Score 21.13296453008084
-	Panthers Rating: 20.7964895990117
-Vikings vs. Cowboys
-	Vikings Rating: 1428.0794525411045
-	Cowboys Rating: 1560.0999413329132
-	Vikings Final Score 23.274430372910707
-	Cowboys Rating: 22.811325910514636
-Saints vs. Jets
-	Saints Rating: 1593.8650093239971
-	Jets Rating: 1434.9238559735845
-	Saints Final Score 23.71013401634152
-	Jets Rating: 22.981983383824755
-Titans vs. Rams
-	Titans Rating: 1454.227179278594
-	Rams Rating: 1477.635862873034
-	Titans Final Score 19.97418954773682
-	Rams Rating: 19.17712134091235
-Chiefs vs. Bills
-	Chiefs Rating: 1511.133270424024
-	Bills Rating: 1464.6168148819024
-	Chiefs Final Score 19.448313009323503
-	Bills Rating: 20.377336476641148
-Chargers vs. Redskins
-	Chargers Rating: 1536.824743671938
-	Redskins Rating: 1498.774905237362
-	Chargers Final Score 22.21603466305688
-	Redskins Rating: 22.351954912134133
-Eagles vs. Raiders
-	Eagles Rating: 1435.2658886929041
-	Raiders Rating: 1470.0784706118848
-	Eagles Final Score 23.38821798649336
-	Raiders Rating: 22.43013408078895
-Buccaneers vs. Seahawks
-	Buccaneers Rating: 1433.701493364557
-	Seahawks Rating: 1568.3115203353427
-	Buccaneers Final Score 20.435143745314466
-	Seahawks Rating: 20.619267693694255
-Ravens vs. Browns
-	Ravens Rating: 1516.8959107553167
-	Browns Rating: 1467.0940354168094
-	Ravens Final Score 20.01944869978073
-	Browns Rating: 18.92099427984522
-Steelers vs. Patriots
-	Steelers Rating: 1500.7936504923487
-	Patriots Rating: 1530.721208519815
-	Steelers Final Score 21.895789831215
-	Patriots Rating: 21.26187784337835
-Colts vs. Texans
-	Colts Rating: 1550.1608206265244
-	Texans Rating: 1439.031496257769
-	Colts Final Score 22.230985557874455
-	Texans Rating: 22.184006736975654
-Bears vs. Packers
-	Bears Rating: 1491.227538376698
-	Packers Rating: 1562.5660896510242
-	Bears Final Score 21.741711020422798
-	Packers Rating: 22.590527667170406
+Colts vs. Titans
+
+	Colts Rating: 1538.5700953858131
+	Titans Rating: 1462.0975067751647
+	Difference Rating: 76.47258861064847
+	Colts Final Score 21.705410432356775
+	Titans Final Score: 21.83462761790367
+	Difference Score: -0.12921718554689576
+
+Jets vs. Bills
+
+	Jets Rating: 1459.905479126063
+	Bills Rating: 1460.1964727742902
+	Difference Rating: -0.290993648227186
+	Jets Final Score 20.904623370265405
+	Bills Final Score: 21.879722996145354
+	Difference Score: -0.9750996258799489
+
+Falcons vs. Buccaneers
+
+	Falcons Rating: 1458.548652602382
+	Buccaneers Rating: 1428.8911973041374
+	Difference Rating: 29.657455298244486
+	Falcons Final Score 21.955176266166287
+	Buccaneers Final Score: 22.359530875070583
+	Difference Score: -0.40435460890429553
+
+Lions vs. Steelers
+
+	Lions Rating: 1503.0097991380526
+	Steelers Rating: 1489.9343019358398
+	Difference Rating: 13.075497202212773
+	Lions Final Score 24.377431208401795
+	Steelers Final Score: 22.740899265619472
+	Difference Score: 1.636531942782323
+
+Redskins vs. Eagles
+
+	Redskins Rating: 1531.259177749448
+	Eagles Rating: 1448.862165221878
+	Difference Rating: 82.39701252757004
+	Redskins Final Score 23.892943818381344
+	Eagles Final Score: 26.043343049662084
+	Difference Score: -2.1503992312807405
+
+Jaguars vs. Cardinals
+
+	Jaguars Rating: 1351.5962684277379
+	Cardinals Rating: 1493.57884105037
+	Difference Rating: -141.98257262263223
+	Jaguars Final Score 18.06617509541487
+	Cardinals Final Score: 20.03775520974356
+	Difference Score: -1.9715801143286882
+
+Raiders vs. Texans
+
+	Raiders Rating: 1456.501780400043
+	Texans Rating: 1450.6264879755522
+	Difference Rating: 5.875292424490681
+	Raiders Final Score 20.656631467453483
+	Texans Final Score: 22.363242037360877
+	Difference Score: -1.7066105699073937
+
+Ravens vs. Bears
+
+	Ravens Rating: 1496.8792465520971
+	Bears Rating: 1527.10737703492
+	Difference Rating: -30.228130482822962
+	Ravens Final Score 22.910407536762317
+	Bears Final Score: 23.807787075978652
+	Difference Score: -0.8973795392163346
+
+Browns vs. Bengals
+
+	Browns Rating: 1487.0966541576715
+	Bengals Rating: 1547.0038343298497
+	Difference Rating: -59.90718017217819
+	Browns Final Score 19.826822155274456
+	Bengals Final Score: 20.084911730085878
+	Difference Score: -0.2580895748114216
+
+Dolphins vs. Chargers
+
+	Dolphins Rating: 1520.3024546626239
+	Chargers Rating: 1504.35505893433
+	Difference Rating: 15.947395728293941
+	Dolphins Final Score 20.90897534358365
+	Chargers Final Score: 20.493531386812897
+	Difference Score: 0.4154439567707513
+
+Packers vs. Giants
+
+	Packers Rating: 1526.7038849462206
+	Giants Rating: 1484.3221341683047
+	Difference Rating: 42.38175077791584
+	Packers Final Score 23.640555435044377
+	Giants Final Score: 22.609344723091866
+	Difference Score: 1.031210711952511
+
+Vikings vs. Seahawks
+
+	Vikings Rating: 1447.8549457450276
+	Seahawks Rating: 1573.1261606621676
+	Difference Rating: -125.27121491714001
+	Vikings Final Score 22.505520847203123
+	Seahawks Final Score: 20.47838378678466
+	Difference Score: 2.027137060418461
+
+49ers vs. Saints
+
+	49ers Rating: 1570.581252074576
+	Saints Rating: 1568.8780928260671
+	Difference Rating: 1.7031592485088822
+	49ers Final Score 23.45909799093417
+	Saints Final Score: 22.028909946424637
+	Difference Score: 1.4301880445095314
+
+Chiefs vs. Broncos
+
+	Chiefs Rating: 1515.5343745122207
+	Broncos Rating: 1547.1059541077789
+	Difference Rating: -31.571579595558205
+	Chiefs Final Score 23.23196043425513
+	Broncos Final Score: 23.20209930703672
+	Difference Score: 0.029861127218410388
+
+Panthers vs. Patriots
+
+	Panthers Rating: 1597.9015000610193
+	Patriots Rating: 1541.5630119601367
+	Difference Rating: 56.338488100882614
+	Panthers Final Score 22.486579340673718
+	Patriots Final Score: 20.72903044829704
+	Difference Score: 1.757548892376679
+

@@ -1,96 +1,96 @@
 
-Team: Cowboys
-	Rating: 1560.0999413329132
-
-Team: Browns
-	Rating: 1467.0940354168094
-
-Team: Titans
-	Rating: 1454.227179278594
-
 Team: Rams
-	Rating: 1477.635862873034
-
-Team: Chargers
-	Rating: 1536.824743671938
-
-Team: Ravens
-	Rating: 1516.8959107553167
-
-Team: Buccaneers
-	Rating: 1433.701493364557
-
-Team: Steelers
-	Rating: 1500.7936504923487
-
-Team: Panthers
-	Rating: 1570.920591288412
-
-Team: Bears
-	Rating: 1491.227538376698
-
-Team: Eagles
-	Rating: 1435.2658886929041
-
-Team: Vikings
-	Rating: 1428.0794525411045
-
-Team: Saints
-	Rating: 1593.8650093239971
-
-Team: Broncos
-	Rating: 1547.1050570466398
-
-Team: Falcons
-	Rating: 1485.5173255932007
-
-Team: 49ers
-	Rating: 1570.5993738238926
-
-Team: Raiders
-	Rating: 1470.0784706118848
-
-Team: Giants
-	Rating: 1484.2918054164072
-
-Team: Lions
-	Rating: 1503.004419979994
-
-Team: Patriots
-	Rating: 1530.721208519815
-
-Team: Jets
-	Rating: 1434.9238559735845
-
-Team: Colts
-	Rating: 1550.1608206265244
-
-Team: Jaguars
-	Rating: 1351.599040296472
-
-Team: Cardinals
-	Rating: 1493.6014286237546
-
-Team: Dolphins
-	Rating: 1488.6161685652016
+	Rating: 1469.7495769287602
 
 Team: Redskins
-	Rating: 1498.774905237362
+	Rating: 1531.259177749448
 
-Team: Bills
-	Rating: 1464.6168148819024
+Team: Cowboys
+	Rating: 1540.3562604694587
 
-Team: Chiefs
-	Rating: 1511.133270424024
+Team: Jaguars
+	Rating: 1351.5962684277379
 
-Team: Seahawks
-	Rating: 1568.3115203353427
-
-Team: Packers
-	Rating: 1562.5660896510242
-
-Team: Texans
-	Rating: 1439.031496257769
+Team: Falcons
+	Rating: 1458.548652602382
 
 Team: Bengals
-	Rating: 1578.7156307265755
+	Rating: 1547.0038343298497
+
+Team: Cardinals
+	Rating: 1493.57884105037
+
+Team: Ravens
+	Rating: 1496.8792465520971
+
+Team: Eagles
+	Rating: 1448.862165221878
+
+Team: Lions
+	Rating: 1503.0097991380526
+
+Team: Broncos
+	Rating: 1547.1059541077789
+
+Team: Browns
+	Rating: 1487.0966541576715
+
+Team: Chargers
+	Rating: 1504.35505893433
+
+Team: Packers
+	Rating: 1526.7038849462206
+
+Team: Raiders
+	Rating: 1456.501780400043
+
+Team: Saints
+	Rating: 1568.8780928260671
+
+Team: Panthers
+	Rating: 1597.9015000610193
+
+Team: Giants
+	Rating: 1484.3221341683047
+
+Team: Dolphins
+	Rating: 1520.3024546626239
+
+Team: Bears
+	Rating: 1527.10737703492
+
+Team: Chiefs
+	Rating: 1515.5343745122207
+
+Team: Jets
+	Rating: 1459.905479126063
+
+Team: 49ers
+	Rating: 1570.581252074576
+
+Team: Steelers
+	Rating: 1489.9343019358398
+
+Team: Colts
+	Rating: 1538.5700953858131
+
+Team: Seahawks
+	Rating: 1573.1261606621676
+
+Team: Buccaneers
+	Rating: 1428.8911973041374
+
+Team: Titans
+	Rating: 1462.0975067751647
+
+Team: Bills
+	Rating: 1460.1964727742902
+
+Team: Texans
+	Rating: 1450.6264879755522
+
+Team: Patriots
+	Rating: 1541.5630119601367
+
+Team: Vikings
+	Rating: 1447.8549457450276
